@@ -1,24 +1,24 @@
-#include "Carrier.hpp"
+#include "Battleship.hpp"
 
-Carrier::Carrier()
+Battleship::Battleship()
 {
-    this->size = 5;
+    this->size = 4;
     this->hitsTaken = 0;
-    this->name = new char(strlen("Carrier")+1);
+    this->name = new char(strlen("BattleShip")+1);
     if(this->name == nullptr)
     {
         std::cout << "could not create a name to the ship" << std::endl;
         return;
     }
-    strcpy(this->name, "Carrier");
+    strcpy(this->name, "BattleShip");
 }
 
-Carrier::~Carrier()
+Battleship::~Battleship()
 {
     delete[] this->name;
 }
 
-void Carrier::takeHit()
+void Battleship::takeHit()
 {
     if(this->hitsTaken >= this->size)
     {
@@ -28,7 +28,7 @@ void Carrier::takeHit()
     this->hitsTaken++;
 }
 
-bool Carrier::isSunk() const
+bool Battleship::isSunk() const
 {
     if(this->hitsTaken >= this->size)
     {
