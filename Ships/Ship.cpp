@@ -1,6 +1,13 @@
 #include "Ship.hpp"
 #include <string.h>
 
+Ship::Ship()
+{
+    this->hitsTaken = 0;
+    this->size = 0;
+    this->name = nullptr;
+}
+
 Ship::Ship(const char* shipName, int shipSize)
 {
     if(shipSize <= 0)
