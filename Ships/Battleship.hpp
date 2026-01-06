@@ -10,5 +10,3 @@ public:
     void takeHit();
     bool isSunk() const;
 };
-
-
