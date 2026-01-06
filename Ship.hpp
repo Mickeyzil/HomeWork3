@@ -2,17 +2,15 @@
 
 class Ship
 {
-private:
-    /* data */
+protected:
+    char* name;
+    int size;
+    int hitsTaken;
 public:
-    Ship(/* args */);
-    ~Ship();
+    Ship(const char* shipName, int shipSize);
+    virtual ~Ship();
+    virtual void takeHit();
+    bool isSunk() const;
 };
 
-Ship::Ship(/* args */)
-{
-}
 
-Ship::~Ship()
-{
-}
