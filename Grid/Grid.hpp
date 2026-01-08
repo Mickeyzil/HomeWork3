@@ -1,9 +1,11 @@
 #pragma once
+#include <iostream>
+const int cellSize = 10;
 
 class Grid
 {
 private:
-    char cells[10][10];
+    char cells[cellSize][cellSize];
 public:
     Grid();
     ~Grid();
