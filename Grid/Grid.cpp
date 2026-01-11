@@ -33,8 +33,12 @@ char Grid::getCell(int row, int col) const
 
 bool Grid::isTitleOccupied(int row, int col) const
 {
+    if (isTitleValid(row, col) == false)
+        return true; 
+
     return cells[row][col] != '~';
 }
+
 
 bool Grid::inBounds(int row, int col, int shipSize, bool horizontal) const
 {
