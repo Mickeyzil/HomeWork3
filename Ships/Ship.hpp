@@ -14,6 +14,7 @@ public:
     virtual ~Ship();
     virtual void takeHit();
     bool isSunk() const;
+    inline int GetSize(){return this->size;};
 };
 
 

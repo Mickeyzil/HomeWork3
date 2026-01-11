@@ -15,6 +15,7 @@ public:
     void MarkHit(int row, int col);
     void MarkMiss(int row, int col);
     char getCell(int row, int col) const;
+    bool isTitleValid(int row, int col);
     void printGrid() const;  //optional
 };
 

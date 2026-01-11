@@ -16,6 +16,19 @@ Grid::~Grid()
 
 }
 
+bool Grid::isTitleValid(int row, int col)
+{
+    if(row > 9 || row < 0)
+    {
+        return false;
+    }
+    if(col > 9 || col < 0)
+    {
+        return false;
+    }
+    return true;
+}
+
 char Grid::getCell(int row, int col) const
 {
     if(row >= cellSize || col >= cellSize)
@@ -92,7 +105,7 @@ void Grid::placeShip(int row, int col, int shipSize, bool horizontal, char symbo
     {
         for(int i=col; i<col+shipSize; i++)
         {
-            this->cells[row][i] = 'S';
+            this->cells[row][i] = symbol;
         }
         return;
     }
@@ -100,7 +113,7 @@ void Grid::placeShip(int row, int col, int shipSize, bool horizontal, char symbo
     {
         for(int i=row; i<row+shipSize; i++)
         {
-            this->cells[i][col] = 'S';
+            this->cells[i][col] = symbol;
         }
         return;
     }
