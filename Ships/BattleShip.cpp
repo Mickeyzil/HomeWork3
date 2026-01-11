@@ -17,22 +17,3 @@ Battleship::~Battleship()
 {
     delete[] this->name;
 }
-
-void Battleship::takeHit()
-{
-    if(this->hitsTaken >= this->size)
-    {
-        std::cout << "couldn't take more hits" << std::endl;
-        return;
-    }
-    this->hitsTaken++;
-}
-
-bool Battleship::isSunk() const
-{
-    if(this->hitsTaken >= this->size)
-    {
-        return true;
-    }
-    return false;
-}

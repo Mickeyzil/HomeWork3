@@ -17,22 +17,3 @@ Cruiser::~Cruiser()
 {
     delete[] this->name;
 }
-
-void Cruiser::takeHit()
-{
-    if(this->hitsTaken >= this->size)
-    {
-        std::cout << "couldn't take more hits" << std::endl;
-        return;
-    }
-    this->hitsTaken++;
-}
-
-bool Cruiser::isSunk() const
-{
-    if(this->hitsTaken >= this->size)
-    {
-        return true;
-    }
-    return false;
-}

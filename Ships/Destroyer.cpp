@@ -17,22 +17,3 @@ Destroyer::~Destroyer()
 {
     delete[] this->name;
 }
-
-void Destroyer::takeHit()
-{
-    if(this->hitsTaken >= this->size)
-    {
-        std::cout << "couldn't take more hits" << std::endl;
-        return;
-    }
-    this->hitsTaken++;
-}
-
-bool Destroyer::isSunk() const
-{
-    if(this->hitsTaken >= this->size)
-    {
-        return true;
-    }
-    return false;
-}

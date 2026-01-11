@@ -35,7 +35,7 @@ void Ship::takeHit()
 {
     if(this->hitsTaken >= this->size)
     {
-        std::cout << "cannot hit the ship" << std::endl;
+        std::cout << "cannot hit the ship, the ship is sunk" << std::endl;
         return;
     }
     this->hitsTaken++;

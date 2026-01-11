@@ -17,22 +17,3 @@ Submarine::~Submarine()
 {
     delete[] this->name;
 }
-
-void Submarine::takeHit()
-{
-    if(this->hitsTaken >= this->size)
-    {
-        std::cout << "couldn't take more hits" << std::endl;
-        return;
-    }
-    this->hitsTaken++;
-}
-
-bool Submarine::isSunk() const
-{
-    if(this->hitsTaken >= this->size)
-    {
-        return true;
-    }
-    return false;
-}
