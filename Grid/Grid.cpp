@@ -6,7 +6,7 @@ Grid::Grid()
     {
         for(int j=0; j<cellSize; j++)
         {
-            this->cells[cellSize][cellSize] = '~';
+            this->cells[i][j] = '~';
         }
     }
 }
@@ -16,112 +16,92 @@ Grid::~Grid()
 
 }
 
-bool Grid::isTitleValid(int row, int col)
+bool Grid::isTitleValid(int row, int col) const
 {
-    if(row > 9 || row < 0)
-    {
-        return false;
-    }
-    if(col > 9 || col < 0)
-    {
-        return false;
-    }
-    return true;
+    return (row >= 0 && row < cellSize) && (col >= 0 && col < cellSize);
 }
 
 char Grid::getCell(int row, int col) const
 {
-    if(row >= cellSize || col >= cellSize)
+    if (row < 0 || col < 0 || row >= cellSize || col >= cellSize)
     {
-        std::cout << "Can not return the symbol in the board" << std::endl;
-        return 'W';
+        std::cout << "Invalid cell access\n";
+        return '~';
     }
-    return this->cells[row][col];
+    return cells[row][col];
 }
 
 bool Grid::isTitleOccupied(int row, int col) const
 {
-    char title = this->cells[row][col];
-    if(title == 'S' || title == 'X')
-    {
-        return true;
-    }
-    return false;
+    return cells[row][col] != '~';
 }
 
-bool Grid::inBounds(int row, int col,  int shipSize, bool horizontal) const
+bool Grid::inBounds(int row, int col, int shipSize, bool horizontal) const
 {
-    if(row >= cellSize || col >= cellSize)
-    {
-        std::cout << "The row or col are not valid" << std::endl;
+    if (row < 0 || col < 0)
         return false;
-    }
-    if(shipSize <= 0)
-    {
-        std::cout << "The size of the ship is invalid" << std::endl;
+
+    if (row >= cellSize || col >= cellSize)
         return false;
-    }
-    if(horizontal == true)
+
+    if (shipSize <= 0)
+        return false;
+
+    if (horizontal)
+        return col + shipSize <= cellSize;
+    else
+        return row + shipSize <= cellSize;
+}
+
+bool Grid::canPlaceShip(int row, int col, int shipSize, bool horizontal) const
+{
+    if (!inBounds(row, col, shipSize, horizontal))
+        return false;
+
+    if (horizontal)
     {
-        for(int i=col; i<col+shipSize;i++)
+        for (int c = col; c < col + shipSize; ++c)
         {
-            if(i >= cellSize)
-            {
-                std::cout << "The ship is not in the grid's bound" << std::endl;
+            if (this->cells[row][c] != '~')
                 return false;
-            }
         }
     }
     else
     {
-        for(int i=row; i<row+shipSize;i++)
+        for (int r = row; r < row + shipSize; ++r)
         {
-            if(i >= cellSize)
-            {
-                std::cout << "The ship is not in the grid's bound" << std::endl;
+            if (this->cells[r][col] != '~')
                 return false;
-            }
         }
     }
+
     return true;
 }
 
-void Grid::placeShip(int row, int col, int shipSize, bool horizontal, char symbol)
+
+bool Grid::placeShip(int row, int col, int shipSize, bool horizontal, char symbol)
 {
-    bool isOccupied = isTitleOccupied(row,col);
-    if(isOccupied == true)
-    {
-        std::cout << "Can not place ship in those row and col" << std::endl;
-        return;
-    }
+    if (!canPlaceShip(row, col, shipSize, horizontal))
+        return false;
 
-    if(this->inBounds(row, col, shipSize,horizontal) == false)
+    if (horizontal)
     {
-        std::cout << "Can not place ship, not in bound" << std::endl;
-        return;
-    }
-
-    if(horizontal == true)
-    {
-        for(int i=col; i<col+shipSize; i++)
-        {
-            this->cells[row][i] = symbol;
-        }
-        return;
+        for (int c = col; c < col + shipSize; ++c)
+            cells[row][c] = symbol;
     }
     else
     {
-        for(int i=row; i<row+shipSize; i++)
-        {
-            this->cells[i][col] = symbol;
-        }
-        return;
+        for (int r = row; r < row + shipSize; ++r)
+            cells[r][col] = symbol;
     }
+
+    return true;
 }
+
 
 void Grid::MarkHit(int row, int col)
 {
-    if(row >= cellSize || col >= cellSize)
+    if(row < 0 || row >= cellSize || col < 0 || col >= cellSize)
     {
         std::cout << "Can not mark hit on board" << std::endl;
         return;
@@ -131,7 +111,7 @@ void Grid::MarkHit(int row, int col)
 
 void Grid::MarkMiss(int row, int col)
 {
-    if(row >= cellSize || col >= cellSize)
+    if(row < 0 || row >= cellSize || col < 0 || col >= cellSize)
     {
         std::cout << "Can not mark miss on board" << std::endl;
         return;

@@ -11,11 +11,12 @@ public:
     ~Grid();
     bool isTitleOccupied(int row, int col) const;
     bool inBounds(int row, int col, int shipSize, bool horizontal) const;
-    void placeShip(int row, int col, int shipSize, bool horizontal, char symbol);
+    bool placeShip(int row, int col, int shipSize, bool horizontal, char symbol);
     void MarkHit(int row, int col);
     void MarkMiss(int row, int col);
     char getCell(int row, int col) const;
-    bool isTitleValid(int row, int col);
+    bool canPlaceShip(int row, int col, int shipSize, bool horizontal) const;
+    bool isTitleValid(int row, int col) const;
     void printGrid() const;  //optional
 };
 

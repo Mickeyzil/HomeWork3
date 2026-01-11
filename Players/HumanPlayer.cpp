@@ -19,135 +19,87 @@ HumanPlayer::~HumanPlayer()
 void HumanPlayer::placeAllShips()
 {
     int row, col;
-    int horizontal;
+    int dir;
     int index = 0;
-    char symbol = 0;
-    while(1)
+    char symbol = '0';
+
+    while (index < 5)
     {
-        if(index > 4)
-        {
-            std::cout << "All ships placed successfully" << std::endl;
-            break;
-        }
-        std::cout << "Please press the row from 0 to 9 and the col from 0 to 9 you like to place the ship" << std::endl;
+        std::cout << "Please enter row (0-9) and col (0-9) to place the ship:\n";
         std::cin >> row >> col;
-        if(this->grid.isTitleValid(row,col) == false)
+
+        if (grid.isTitleValid(row, col) == false)
         {
-            std::cout << "The row or the col is not valid please try again" << std::endl;
-            continue;
-        }
-        if(this->grid.isTitleOccupied(row,col) == true)
-        {
-            std::cout << "The title you chose is already taken" << std::endl;
+            std::cout << "Invalid row/col. Try again.\n";
             continue;
         }
 
-        std::cout << "Please write 1 if you want the ship horizontal or 2 if you want the ship vertical" << std::endl;
-        std::cin >> horizontal;
-        
-        if((horizontal != 1) && (horizontal != 2))
+        std::cout << "Enter 1 for horizontal or 2 for vertical:\n";
+        std::cin >> dir;
+
+        if (dir != 1 && dir != 2)
         {
-            std::cout << "you did not choose direction to the ship,horizontal or vertical please try again" << std::endl;
+            std::cout << "Invalid direction. Try again.\n";
             continue;
         }
-        
-        if(horizontal == 1)
+
+        bool isHorizontal = (dir == 1);
+        int size = ships[index]->GetSize();
+
+        if (grid.inBounds(row, col, size, isHorizontal) == false)
         {
-            if(this->grid.inBounds(row,col,this->ships[index]->GetSize(),true) == false)
-            {
-                std::cout << "Can not plase the ship in grid, the bounds crossed" << std::endl;
-                continue;
-            }
-            
-            this->grid.placeShip(row,col,this->ships[index]->GetSize(),true, symbol);
-            index++;
-            symbol++;
+            std::cout << "Out of bounds. Try again.\n";
             continue;
         }
-        else
+        if (grid.canPlaceShip(row, col, size, isHorizontal) == false)   
         {
-            if(this->grid.inBounds(row,col,this->ships[index]->GetSize(),false) == false)
-            {
-                std::cout << "Can not plase the ship in grid, the bounds crossed" << std::endl;
-                continue;
-            }
-            
-            this->grid.placeShip(row,col,this->ships[index]->GetSize(),false,symbol);
-            index++;
-            symbol++;
+            std::cout << "Collision with another ship. Try again.\n";
             continue;
         }
-    }  
+
+        grid.placeShip(row, col, size, isHorizontal, symbol);
+
+        index++;
+        symbol++;
+    }
+
+    std::cout << "All ships placed successfully\n";
 }
 
 void HumanPlayer::makeMove(Player* opponent)
 {
     int row, col;
-    std::cout << "Please choose row and col to attack" << std::endl;
+    std::cout << "Please choose row and col to attack\n";
     std::cin >> row >> col;
-    if(this->grid.isTitleValid(row,col) == false)
+
+    if (!opponent->getGrid().isTitleValid(row, col))
     {
-        std::cout << "The title you chose is not valid, you lost your turn" << std::endl;
+        std::cout << "The tile you chose is not valid, you lost your turn\n";
         return;
     }
-    char target = opponent->getGrid().getCell(row,col);
-    if(target == '~')
+
+    char target = opponent->getGrid().getCell(row, col);
+
+    if (target == 'X' || target == 'M')
     {
-        std::cout << "The title you chose is empty, marks as miss" << std::endl;
+        std::cout << "You already chose this target before, you lost your turn\n";
+        return;
+    }
+
+    if (target == '~')
+    {
+        std::cout << "Miss!\n";
         opponent->getGrid().MarkMiss(row, col);
         return;
     }
-    else if(target == 'X' || target == 'M')
-    {
-        std::cout << "you already chose this target before" << std::endl;
+
+    int idx = target - '0';
+    if (idx < 0 || idx >= 5)
+    {        
+        std::cout << "Unexpected cell value\n";
         return;
     }
-    else
-    {
-        if(target == '0')
-        {
-            if(opponent->getShip(0)->isSunk() == true)
-            {
-                std::cout << "You attack a sunk ship, attack doesn't count" << std::endl;
-                return;
-            }
-            opponent->getShip(0)->takeHit();
-        }
-        else if(target == '1')
-        {
-            if(opponent->getShip(1)->isSunk() == true)
-            {
-                std::cout << "You attack a sunk ship, attack doesn't count" << std::endl;
-                return;
-            }
-            opponent->getShip(1)->takeHit();
-        }
-        else if(target == '2')
-        {
-            if(opponent->getShip(2)->isSunk() == true)
-            {
-                std::cout << "You attack a sunk ship, attack doesn't count" << std::endl;
-                return;
-            }
-            opponent->getShip(2)->takeHit();
-        }
-        else if(target == '3')
-        {
-            if(opponent->getShip(3)->isSunk() == true)
-            {
-                std::cout << "You attack a sunk ship, attack doesn't count" << std::endl;
-                return;
-            }
-            opponent->getShip(3)->takeHit();
-        }
-        else
-        {
-            if(opponent->getShip(4)->isSunk() == true)
-            {
-                std::cout << "You attack a sunk ship, attack doesn't count" << std::endl;
-                return;
-            }
-            opponent->getShip(4)->takeHit();
-        }
-    }
+
+    opponent->getShip(idx)->takeHit();
+    opponent->getGrid().MarkHit(row, col);
 }
