@@ -86,7 +86,7 @@ void HumanPlayer::makeMove(Player* opponent)
     }
 
     int idx = target - '0';
-    if (idx < 0 || idx >= 5)
+    if (idx < 0 || idx >= MaxShips)
     {        
         std::cout << "Unexpected cell value\n";
         return;

@@ -24,7 +24,7 @@ public:
     inline Grid& getGrid(){return this->grid;};
     inline const Grid& getGrid() const{return this->grid;};
     inline Ship* getShip(int index){return this->ships[index];};
-    void displayMyGrid(); // optional
+    void displayMyGrid() const; 
 };
 
 

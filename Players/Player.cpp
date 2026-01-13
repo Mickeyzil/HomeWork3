@@ -1,4 +1,6 @@
 #include "Player.hpp"
+#include <cstring>   
+#include <iostream>  
 
 Player::Player(const char* name)
 {
@@ -43,7 +45,7 @@ bool Player::allShipsSunk() const
     return true;
 }
 
-void Player::displayMyGrid()
+void Player::displayMyGrid() const
 {
     this->grid.printGrid();
 }
