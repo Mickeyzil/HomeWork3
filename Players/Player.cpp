@@ -8,13 +8,18 @@ Player::Player(const char* name)
     this->ships[3] = new Submarine();
     this->ships[4] = new Destroyer();
     this->grid = Grid();
-    this->playerName = new char(strlen(name)+1);
+    this->playerName = new char[strlen(name)+1];
     if(this->playerName == nullptr)
     {
         std::cout << "The player has no name" << std::endl;
         return;
     }
     strcpy(this->playerName, name);
+}
+
+Player::Player() : Player("Player")
+{
+
 }
 
 Player::~Player()
@@ -36,4 +41,9 @@ bool Player::allShipsSunk() const
         }
     }
     return true;
+}
+
+void Player::displayMyGrid()
+{
+    this->grid.printGrid();
 }

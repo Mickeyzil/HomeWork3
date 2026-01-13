@@ -1,20 +1,11 @@
 #include "HumanPlayer.hpp"
 
-HumanPlayer::HumanPlayer(const char* name)
+HumanPlayer::HumanPlayer(const char* name) : Player(name)
 {
-    this->playerName = new char(strlen(name)+1);
-    if(this->playerName == nullptr)
-    {
-        std::cout << "the player has no name" << std::endl;
-        return;
-    }
-    strcpy(this->playerName, name);
+   
 }
 
-HumanPlayer::~HumanPlayer()
-{
-    delete[] this->playerName;
-}
+HumanPlayer::~HumanPlayer() = default;
 
 void HumanPlayer::placeAllShips()
 {
@@ -104,6 +95,6 @@ void HumanPlayer::makeMove(Player* opponent)
     opponent->getShip(idx)->takeHit();
     opponent->getGrid().MarkHit(row, col);
 
-    this->grid.printGrid();
-    opponent->getGrid().printGrid();
+    this->displayMyGrid();
+    opponent->displayMyGrid();
 }

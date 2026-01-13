@@ -122,3 +122,23 @@ void Grid::MarkMiss(int row, int col)
     }
     this->cells[row][col] = 'M';
 }
+
+void Grid::printGrid() const
+{
+    std::cout << "  ";
+    for (int col = 0; col < cellSize; ++col)
+    {
+        std::cout << col << " ";
+    }
+    std::cout << "\n";
+
+    for (int row = 0; row < cellSize; ++row)
+    {
+        std::cout << row << " ";
+        for (int col = 0; col < cellSize; ++col)
+        {
+            std::cout << cells[row][col] << " ";
+        }
+        std::cout << "\n";
+    }
+}

@@ -1,20 +1,11 @@
 #include "AiPlayer.hpp"
 
-AiPlayer::AiPlayer()
+AiPlayer::AiPlayer() : Player("AiPlayer")
 {
-    this->playerName = new char(strlen("AiPlayer")+1);
-    if(this->playerName == nullptr)
-    {
-        std::cout << "The AI Player has no name\n";
-        return;
-    }
-    strcpy(this->playerName, "AiPlayer");
+   
 }
 
-AiPlayer::~AiPlayer()
-{
-    delete[] this->playerName;
-}
+AiPlayer::~AiPlayer() = default;
 
 void AiPlayer::placeAllShips()
 {
@@ -66,6 +57,6 @@ void AiPlayer::makeMove(Player* opponent)
     opponent->getShip(idx)->takeHit();
     opponent->getGrid().MarkHit(row, col);
 
-    this->grid.printGrid();
-    opponent->getGrid().printGrid();
+    this->displayMyGrid();
+    opponent->displayMyGrid();
 }
