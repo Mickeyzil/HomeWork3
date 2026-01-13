@@ -11,6 +11,7 @@ Player::Player(const char* name)
     this->playerName = new char(strlen(name)+1);
     if(this->playerName == nullptr)
     {
+        std::cout << "The player has no name" << std::endl;
         return;
     }
     strcpy(this->playerName, name);
@@ -19,7 +20,7 @@ Player::Player(const char* name)
 Player::~Player()
 {
     delete[] this->playerName;
-    for(int i=0; i<5; i++)
+    for(int i=0; i<MaxShips; i++)
     {
         delete this->ships[i];
     }
@@ -27,7 +28,7 @@ Player::~Player()
 
 bool Player::allShipsSunk() const
 {
-    for(int i=0; i<5; i++)
+    for(int i=0; i<MaxShips; i++)
     {
         if(this->ships[i]->isSunk() == false)
         {

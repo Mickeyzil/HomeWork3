@@ -5,7 +5,7 @@ HumanPlayer::HumanPlayer(const char* name)
     this->playerName = new char(strlen(name)+1);
     if(this->playerName == nullptr)
     {
-        std::cout << "the human player has name" << std::endl;
+        std::cout << "the player has no name" << std::endl;
         return;
     }
     strcpy(this->playerName, name);
@@ -23,7 +23,7 @@ void HumanPlayer::placeAllShips()
     int index = 0;
     char symbol = '0';
 
-    while (index < 5)
+    while (index < MaxShips)
     {
         std::cout << "Please enter row (0-9) and col (0-9) to place the ship:\n";
         std::cin >> row >> col;
@@ -57,10 +57,11 @@ void HumanPlayer::placeAllShips()
             continue;
         }
 
-        grid.placeShip(row, col, size, isHorizontal, symbol);
-
-        index++;
-        symbol++;
+        if(grid.placeShip(row, col, size, isHorizontal, symbol) == true)
+        {
+            index++;
+            symbol++;
+        }
     }
 
     std::cout << "All ships placed successfully\n";
@@ -102,4 +103,7 @@ void HumanPlayer::makeMove(Player* opponent)
 
     opponent->getShip(idx)->takeHit();
     opponent->getGrid().MarkHit(row, col);
+
+    this->grid.printGrid();
+    opponent->getGrid().printGrid();
 }

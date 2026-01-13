@@ -6,11 +6,13 @@
 #include "Submarine.hpp"
 #include "Grid.hpp"
 
+const int MaxShips = 5;
+
 class Player
 {
 protected:
     char* playerName;
-    Ship* ships[5];
+    Ship* ships[MaxShips];
     Grid grid;
 public:
     Player();
