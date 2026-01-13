@@ -42,7 +42,7 @@ void AiPlayer::makeMove(Player* opponent)
     int row = rand() % 10;
     int col = rand() % 10;
     char target = opponent->getGrid().getCell(row,col);
-    while(target == 'X')
+    while(target == 'X' || target == 'M')
     {
         row = rand() % 10;
         col = rand() % 10;
