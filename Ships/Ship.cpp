@@ -38,6 +38,7 @@ void Ship::takeHit()
         std::cout << "cannot hit the ship, the ship is sunk" << std::endl;
         return;
     }
+    std::cout << this->name << "got hit!" << std::endl;
     this->hitsTaken++;
 }
 
