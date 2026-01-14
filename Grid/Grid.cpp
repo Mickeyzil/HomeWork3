@@ -103,7 +103,7 @@ bool Grid::placeShip(int row, int col, int shipSize, bool horizontal, char symbo
 }
 
 
-void Grid::MarkHit(int row, int col)
+void Grid::markHit(int row, int col)
 {
     if(row < 0 || row >= cellSize || col < 0 || col >= cellSize)
     {
@@ -113,7 +113,7 @@ void Grid::MarkHit(int row, int col)
     this->cells[row][col] = 'X';
 }
 
-void Grid::MarkMiss(int row, int col)
+void Grid::markMiss(int row, int col)
 {
     if(row < 0 || row >= cellSize || col < 0 || col >= cellSize)
     {
