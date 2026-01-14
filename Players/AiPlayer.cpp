@@ -1,4 +1,6 @@
 #include "AiPlayer.hpp"
+#include <iostream>
+#include <cstdlib>  
 
 AiPlayer::AiPlayer() : Player("AiPlayer")
 {
@@ -19,12 +21,12 @@ void AiPlayer::placeAllShips()
         col = rand() % 10;
         isHorizontal = rand() % 2;
         int size = this->getShip(index)->GetSize();
-        if(this->grid.canPlaceShip(row,col,size,isHorizontal) == true)
+        if (this->getGrid().placeShip(row, col, size, isHorizontal, symbol))
         {
-            this->grid.placeShip(row,col,size,isHorizontal,symbol);
             index++;
             symbol++;
         }
+
     }
 }
 
@@ -43,7 +45,9 @@ void AiPlayer::makeMove(Player* opponent)
     if (target == '~')
     {
         std::cout << "Miss!\n";
-        opponent->getGrid().MarkMiss(row, col);
+        opponent->getGrid().markMiss(row, col);
+        this->displayMyGrid();
+        opponent->displayMyGrid();
         return;
     }
 
@@ -55,7 +59,7 @@ void AiPlayer::makeMove(Player* opponent)
     }
 
     opponent->getShip(idx)->takeHit();
-    opponent->getGrid().MarkHit(row, col);
+    opponent->getGrid().markHit(row, col);
 
     this->displayMyGrid();
     opponent->displayMyGrid();

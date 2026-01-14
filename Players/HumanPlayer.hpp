@@ -7,8 +7,8 @@ private:
 public:
     HumanPlayer(const char* name);
     ~HumanPlayer();
-    void placeAllShips();
-    void makeMove(Player* opponent);
+    void placeAllShips() override;
+    void makeMove(Player* opponent) override;
 };
 
 

@@ -7,6 +7,6 @@ private:
 public:
     AiPlayer();
     ~AiPlayer();
-    void placeAllShips();
-    void makeMove(Player* opponent);
+    void placeAllShips() override;
+    void makeMove(Player* opponent) override;
 };

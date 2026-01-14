@@ -2,14 +2,13 @@
 #include <cstring>   
 #include <iostream>  
 
-Player::Player(const char* name)
+Player::Player(const char* name) : grid()
 {
     this->ships[0] = new Carrier();
     this->ships[1] = new Battleship();
     this->ships[2] = new Cruiser();
     this->ships[3] = new Submarine();
     this->ships[4] = new Destroyer();
-    this->grid = Grid();
     this->playerName = new char[strlen(name)+1];
     if(this->playerName == nullptr)
     {

@@ -1,4 +1,5 @@
 #include "HumanPlayer.hpp"
+#include <iostream>
 
 HumanPlayer::HumanPlayer(const char* name) : Player(name)
 {
@@ -67,6 +68,8 @@ void HumanPlayer::makeMove(Player* opponent)
     if (!opponent->getGrid().isTitleValid(row, col))
     {
         std::cout << "The tile you chose is not valid, you lost your turn\n";
+        this->displayMyGrid();
+        opponent->displayMyGrid();
         return;
     }
 
@@ -75,13 +78,17 @@ void HumanPlayer::makeMove(Player* opponent)
     if (target == 'X' || target == 'M')
     {
         std::cout << "You already chose this target before, you lost your turn\n";
+        this->displayMyGrid();
+        opponent->displayMyGrid();
         return;
     }
 
     if (target == '~')
     {
         std::cout << "Miss!\n";
-        opponent->getGrid().MarkMiss(row, col);
+        opponent->getGrid().markMiss(row, col);
+        this->displayMyGrid();
+        opponent->displayMyGrid();
         return;
     }
 
@@ -93,7 +100,7 @@ void HumanPlayer::makeMove(Player* opponent)
     }
 
     opponent->getShip(idx)->takeHit();
-    opponent->getGrid().MarkHit(row, col);
+    opponent->getGrid().markHit(row, col);
 
     this->displayMyGrid();
     opponent->displayMyGrid();
