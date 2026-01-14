@@ -25,6 +25,7 @@ public:
     inline const Grid& getGrid() const{return this->grid;};
     inline Ship* getShip(int index){return this->ships[index];};
     void displayMyGrid() const; 
+    inline char* getName(){return this->playerName;};
 };
 
 
