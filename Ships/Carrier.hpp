@@ -8,6 +8,4 @@ private:
 public:
     Carrier();
     ~Carrier();
-    void takeHit() override;
-    bool isSunk() const;
 };

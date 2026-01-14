@@ -8,6 +8,4 @@ private:
 public:
     Battleship();
     ~Battleship();
-    void takeHit();
-    bool isSunk() const;
 };

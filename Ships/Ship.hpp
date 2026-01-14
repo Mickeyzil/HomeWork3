@@ -9,10 +9,9 @@ protected:
     int size;
     int hitsTaken;
 public:
-    Ship();
     Ship(const char* shipName, int shipSize);
     virtual ~Ship();
-    void takeHit();
+    virtual void takeHit();
     bool isSunk() const;
-    inline int GetSize(){return this->size;};
+    inline int GetSize() const {return this->size;};
 };

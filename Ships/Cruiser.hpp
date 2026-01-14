@@ -8,6 +8,4 @@ private:
 public:
     Cruiser();
     ~Cruiser();
-    void takeHit() override;
-    bool isSunk() const;
 };

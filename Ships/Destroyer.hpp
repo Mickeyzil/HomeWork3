@@ -8,6 +8,4 @@ private:
 public:
     Destroyer();
     ~Destroyer();
-    void takeHit() override;
-    bool isSunk() const;
 };
