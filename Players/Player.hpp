@@ -1,3 +1,4 @@
+#pragma once
 #include "Ship.hpp"
 #include "Carrier.hpp"
 #include "Cruiser.hpp"
