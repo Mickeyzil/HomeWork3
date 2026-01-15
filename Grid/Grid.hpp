@@ -17,6 +17,6 @@ public:
     char getCell(int row, int col) const;
     bool canPlaceShip(int row, int col, int shipSize, bool horizontal) const;
     bool isTitleValid(int row, int col) const;
-    void printGrid() const;  //optional
+    void printGrid() const;  
 };
 

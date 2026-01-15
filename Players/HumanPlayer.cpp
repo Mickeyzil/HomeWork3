@@ -69,7 +69,7 @@ void HumanPlayer::makeMove(Player* opponent)
     {
         std::cout << "The tile you chose is not valid, you lost your turn\n";
         this->displayMyGrid();
-        opponent->displayMyGrid();
+        opponent->printOpponentGrid();
         return;
     }
 
@@ -79,7 +79,7 @@ void HumanPlayer::makeMove(Player* opponent)
     {
         std::cout << "You already chose this target before, you lost your turn\n";
         this->displayMyGrid();
-        opponent->displayMyGrid();
+        opponent->printOpponentGrid();
         return;
     }
 
@@ -88,7 +88,7 @@ void HumanPlayer::makeMove(Player* opponent)
         std::cout << "Miss!\n";
         opponent->getGrid().markMiss(row, col);
         this->displayMyGrid();
-        opponent->displayMyGrid();
+        opponent->printOpponentGrid();
         return;
     }
 
@@ -103,5 +103,5 @@ void HumanPlayer::makeMove(Player* opponent)
     opponent->getGrid().markHit(row, col);
 
     this->displayMyGrid();
-    opponent->displayMyGrid();
+    opponent->printOpponentGrid();
 }

@@ -47,7 +47,7 @@ void AiPlayer::makeMove(Player* opponent)
         std::cout << "Miss!\n";
         opponent->getGrid().markMiss(row, col);
         this->displayMyGrid();
-        opponent->displayMyGrid();
+        opponent->printOpponentGrid();
         return;
     }
 
@@ -62,5 +62,5 @@ void AiPlayer::makeMove(Player* opponent)
     opponent->getGrid().markHit(row, col);
 
     this->displayMyGrid();
-    opponent->displayMyGrid();
+    opponent->printOpponentGrid();
 }

@@ -48,3 +48,29 @@ void Player::displayMyGrid() const
 {
     this->grid.printGrid();
 }
+
+void Player::printOpponentGrid() const
+{
+    std::cout << "  ";
+    for (int col = 0; col < cellSize; ++col)
+    {
+        std::cout << col << " ";
+    }
+    std::cout << "\n";
+
+    for (int row = 0; row < cellSize; ++row)
+    {
+        std::cout << row << " ";
+        for (int col = 0; col < cellSize; ++col)
+        {
+            char cell = this->grid.getCell(row,col);
+            if(cell == 'X' || cell == 'M')
+            {
+                std::cout << cell << " ";
+                continue;
+            }
+            std:: cout << "~" << " ";
+        }
+        std::cout << "\n";
+    }
+}

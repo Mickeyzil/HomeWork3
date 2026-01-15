@@ -26,6 +26,7 @@ public:
     inline Ship* getShip(int index) { return ships[index]; }
     inline const Ship* getShip(int index) const { return ships[index]; }
     void displayMyGrid() const; 
+    void printOpponentGrid() const;
     inline const char* getName() const {return this->playerName;};
 };
 
