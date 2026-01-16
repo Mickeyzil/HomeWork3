@@ -1,20 +1,15 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic
+CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic \
+           -IGame -IGrid -IPlayers -IShips
 
 TARGET = battleship
 
 SRCS = main.cpp \
-       Game.cpp \
-       Player.cpp \
-       HumanPlayer.cpp \
-       AiPlayer.cpp \
-       Grid.cpp \
-       Ship.cpp \
-       Carrier.cpp \
-       Battleship.cpp \
-       Cruiser.cpp \
-       Submarine.cpp \
-       Destroyer.cpp
+       Game/Game.cpp \
+       Grid/Grid.cpp \
+       Players/Player.cpp Players/HumanPlayer.cpp Players/AiPlayer.cpp \
+       Ships/Ship.cpp Ships/Carrier.cpp Ships/Battleship.cpp \
+       Ships/Cruiser.cpp Ships/Submarine.cpp Ships/Destroyer.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
